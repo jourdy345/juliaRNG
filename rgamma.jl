@@ -1,3 +1,40 @@
+"""
+DATE OF CREATION
+    
+    Feb.02.2017
+
+
+
+AUTHOR  
+  
+    Daeyoung Lim,
+    Department of Statistics,
+    Korea University
+
+
+DESCRIPTION
+
+    Random variates from the gamma distribution.
+
+
+
+REFERENCES
+
+    [1] Shape parameter a >= 1.  Algorithm GD in:
+
+    Ahrens, J.H. and Dieter, U. (1982).
+    Generating gamma variates by a modified
+    rejection technique.
+    Comm. ACM, 25, 47-54.
+
+
+    [2] Shape parameter 0 < a < 1. Algorithm GS in:
+
+    Ahrens, J.H. and Dieter, U. (1974).
+    Computer methods for sampling from gamma, beta,
+    poisson and binomial distributions.
+    Computing, 12, 223-246.
+"""
 include("rexp.jl")
 function rgamma(n::Int64, a::Float64, scale::Float64)
     if isinf(a) || isinf(scale) || a<0. || scale <= 0.

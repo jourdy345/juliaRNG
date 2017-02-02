@@ -1,19 +1,57 @@
-function pnorm(x::Float64,mu::Float64,sigma::Float64,lower_tail::Bool = true,log_p::Bool = false)
-    if isinf(x) && (mu == x)
+"""
+DATE OF CREATION
+    
+    Feb.02.2017
+
+
+
+AUTHOR  
+  
+    Daeyoung Lim,
+    Department of Statistics,
+    Korea University
+
+
+
+DESCRIPTION
+
+    This code evaluates the CDF of normal distribution at a given point.
+    The code is translated from the R core development team's pnorm function.
+    The main computation evaluates near-minimax approximations derived
+    from those in "Rational Chebyshev approximations for the error
+    function" by W. J. Cody, Math. Comp., 1969, 631-637.  This
+    transportable program uses rational functions that theoretically
+    approximate the normal distribution function to at least 18
+    significant decimal digits.  The accuracy achieved depends on the
+    arithmetic system, the compiler, the intrinsic functions, and
+    proper selection of the machine-dependent constants.
+ 
+
+ 
+REFERENCE
+ 
+   Cody, W. D. (1993).
+   ALGORITHM 715: SPECFUN - A Portable FORTRAN Package of
+   Special Function Routines and Test Drivers".
+   ACM Transactions on Mathematical Software. 19, 22-32.
+
+"""
+function pnorm(x::Float64,μ::Float64,σ::Float64,lower_tail::Bool = true,log_p::Bool = false)
+    if isinf(x) && (μ == x)
         return NaN     
     end
     R_D_0 = log_p ? -Inf : 0.
     R_D_1 = log_p ? 0. : 1.
     R_DT_0 = lower_tail ? R_D_0 : R_D_1
     R_DT_1 = lower_tail ? R_D_1 : R_D_0
-    if sigma <= 0.
-        if sigma <= 0
-            return (x<mu) ? R_DT_0 : R_DT_1
+    if σ <= 0.
+        if σ <= 0
+            return (x<μ) ? R_DT_0 : R_DT_1
         end
     end
-    p_ = (x-mu)/sigma
+    p_ = (x-μ)/σ
     if isinf(p_)
-        return (x<mu) ? R_DT_0 : R_DT_1
+        return (x<μ) ? R_DT_0 : R_DT_1
     end
     x = p_
 
@@ -24,7 +62,7 @@ function pnorm(x::Float64,mu::Float64,sigma::Float64,lower_tail::Bool = true,log
     p = [0.21589853405795699,0.1274011611602473639,0.022235277870649807,0.001421619193227893466,2.9112874951168792e-5,0.02307344176494017303]
     q = [1.28426009614491121,0.468238212480865118,0.0659881378689285515,0.00378239633202758244,7.29751555083966205e-5]
 
-    ϵ = eps()*0.5
+    ϵ = 2.2204460492503131e-16*0.5
     y = abs(x)
     M_SQRT_32 = 5.656854249492380195206754896838
     M_1_SQRT_2PI = 0.398942280401432677939946059934
@@ -85,7 +123,7 @@ function pnorm(x::Float64,mu::Float64,sigma::Float64,lower_tail::Bool = true,log
                 ccum = tmp
             end
         end
-    elseif (log_p && y < 1.0e170) || (lower_tail && -37.5193 < x  &&  x < 8.2924) || (!lower_tail && -8.2924  < x  &&  x < 37.5193)
+    elseif (log_p && y < 1.0e170) || (lower_tail && -37.5193 < x < 8.2924) || (!lower_tail && -8.2924  < x < 37.5193)
         xsq = 1./(x*x)
         xnum = p[6]*xsq
         xden = xsq

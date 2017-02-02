@@ -1,3 +1,30 @@
+"""
+DATE OF CREATION
+    
+    Feb.02.2017
+
+
+AUTHOR
+   
+    Daeyoung Lim,
+    Department of Statistics,
+    Korea University
+
+
+
+DESCRIPTION
+
+    This code generates Kolmogorov-Smirnov random variables
+    The algorithm is credited to Devroye.
+
+
+
+REFERENCE
+
+    "Non-Uniform Random Variate Generation, Luc Devroye, Springer-Verlag, 1986,
+    the University of California, 16 Dec 2010, ISBN:0387963057, 9780387963051"
+"""
+
 function rKS(n::Int64)
     t = 0.75
     tprime = pi^2./(8.*t^2.)
@@ -76,16 +103,4 @@ function rKS(n::Int64)
         end
     end
     output
-end
-
-n = 0
-while true
-    n += 1
-    if n % 2 == 0
-        continue
-    end
-    println(n)
-    if n > 15
-        break
-    end
 end
