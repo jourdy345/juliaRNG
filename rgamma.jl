@@ -35,7 +35,7 @@ REFERENCES
     poisson and binomial distributions.
     Computing, 12, 223-246.
 """
-include("rexp.jl")
+
 function rgamma(n::Int64, a::Float64, scale::Float64)
     if isinf(a) || isinf(scale) || a<0. || scale <= 0.
         throw(ArgumentError("Invalid parameter(s)"))

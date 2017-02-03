@@ -1,4 +1,3 @@
-include("rchisq.jl")
 function rWish(df::Int64, S::Array{Float64,2})
     if size(S,1) != size(S,2)
         throw(ArgumentError("S should be square symmetric positive definite"))

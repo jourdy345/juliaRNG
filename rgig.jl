@@ -8,11 +8,6 @@ Descriptiion    : This code generates random variables from
                   the generalized inverse Gaussian distribution
                   with the given parameters.
 """
-
-
-include("rexp.jl")
-include("rgamma.jl")
-using Roots
 function rgig(n::Int64, λ::Float64, χ::Float64, ψ::Float64)
     if χ < 0. || ψ < 0.
         throw(ArgumentError("Invalid parameters for GIG"))
