@@ -12,7 +12,7 @@ function rgeom(n::Int64, p::Float64)
         u = rand(1)[1]
         while u > S
             X += 1
-            S += dgeo(X,p)
+            S += dgeom(X,p)
         end
         res[i] = X
     end

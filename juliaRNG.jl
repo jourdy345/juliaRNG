@@ -1,9 +1,11 @@
 module juliaRNG
 using Roots
-export dgeom,dgamma,dnorm,pnorm,qnorm,rbeta,rchisq,rexp,rgamma,rgeom,rgig,rKS,rpois,rtexp,rtnorm,rWish
+export dexp,dgeom,dgamma,dnorm,pexp,pnorm,qnorm,rbeta,rchisq,rexp,rgamma,rgeom,rgig,rKS,rpois,rtexp,rtnorm,rWish
+include("dexp.jl")
 include("dgeom.jl")
 include("dgamma.jl")
 include("dnorm.jl")
+include("pexp.jl")
 include("pnorm.jl")
 include("qnorm.jl")
 include("rbeta.jl")
